@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/alexmenachot15-prog/balance-inv#readme",
   "dependencies": {
+    "@capacitor/android": "^8.5.2",
     "@capacitor/core": "^8.5.2"
   },
   "devDependencies": {

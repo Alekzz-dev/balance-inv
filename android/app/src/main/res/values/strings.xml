@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BALANCE-INV</string>
+    <string name="title_activity_main">BALANCE-INV</string>
+    <string name="package_name">com.balanceinv.app</string>
+    <string name="custom_url_scheme">com.balanceinv.app</string>
+</resources>
