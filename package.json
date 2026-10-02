@@ -1,0 +1,21 @@
+{
+  "name": "balance-inv",
+  "version": "1.0.0",
+  "description": "Sistema de control de inventario, ventas y documentación (aplicación móvil Android).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexmenachot15-prog/balance-inv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alexmenachot15-prog/balance-inv/issues"
+  },
+  "homepage": "https://github.com/alexmenachot15-prog/balance-inv#readme"
+}
