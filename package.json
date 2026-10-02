@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/alexmenachot15-prog/balance-inv/issues"
   },
-  "homepage": "https://github.com/alexmenachot15-prog/balance-inv#readme"
+  "homepage": "https://github.com/alexmenachot15-prog/balance-inv#readme",
+  "dependencies": {
+    "@capacitor/core": "^8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2"
+  }
 }
