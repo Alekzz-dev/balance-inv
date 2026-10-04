@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function autenticado() { return request.auth != null; }
+    function rol() {
+      return get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.rol;
+    }
+
+    match /usuarios/{id} {
+      allow read: if autenticado();
+      allow write: if rol() == 'admin';
+    }
+
+    match /proveedores/{id} {
+      allow read: if autenticado();
+      allow write: if rol() == 'admin';
+    }
+
+    match /productos/{id} {
+      allow read: if autenticado();
+      allow create, delete: if rol() == 'admin';
+      allow update: if rol() == 'admin'
+        || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stock']);
+    }
+
+    match /compras/{id} {
+      allow read, create, update: if autenticado();
+      allow delete: if rol() == 'admin';
+    }
+
+    match /documentos/{id} {
+      allow read, create: if autenticado();
+      allow update, delete: if rol() == 'admin';
+    }
+
+    match /ventas/{id} {
+      allow read, create: if autenticado();
+      allow update, delete: if rol() == 'admin';
+    }
+
+    match /movimientos/{id} {
+      allow read, create: if autenticado();
+      allow update, delete: if false;
+    }
+
+    match /alertas/{id} {
+      allow read, create, update: if autenticado();
+      allow delete: if rol() == 'admin';
+    }
+  }
+}
