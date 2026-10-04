@@ -1,0 +1,24 @@
+:root {
+  --color-primario: #1f3a5f;
+  --color-texto: #1f2937;
+  --color-fondo: #f4f6f9;
+  --color-error: #b91c1c;
+  --espacio: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+}
+
+#contenido {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--espacio);
+}

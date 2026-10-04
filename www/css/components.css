@@ -1,0 +1,37 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.campo input {
+  min-height: 3rem;
+  padding: 0 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #c9d1db;
+  border-radius: 0.5rem;
+}
+
+.boton {
+  min-height: 3rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background: var(--color-primario);
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.boton:disabled {
+  opacity: 0.6;
+}
+
+.mensaje-error {
+  color: var(--color-error);
+  min-height: 1.25rem;
+}
