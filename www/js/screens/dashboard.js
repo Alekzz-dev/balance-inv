@@ -7,6 +7,7 @@ export function render() {
     <h1>Dashboard</h1>
     <p id="saludo">Cargando...</p>
     <p>Aquí irán los indicadores del Dashboard.</p>
+    <p><a href="#/productos">Productos</a></p>
     <button class="boton" type="button" id="boton-salir">Cerrar sesión</button>
   `;
 

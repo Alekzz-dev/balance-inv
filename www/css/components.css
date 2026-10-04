@@ -35,3 +35,32 @@
   color: var(--color-error);
   min-height: 1.25rem;
 }
+.campo select {
+  min-height: 3rem;
+  padding: 0 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #c9d1db;
+  border-radius: 0.5rem;
+}
+
+.mensaje-exito {
+  color: #15803d;
+  min-height: 1.25rem;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #c9d1db;
+}

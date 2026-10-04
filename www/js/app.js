@@ -4,9 +4,12 @@ import { onAuthStateChanged }
 
 const rutas = {
   "#/login": () => import("./screens/login.js"),
-  "#/dashboard": () => import("./screens/dashboard.js")
+  "#/dashboard": () => import("./screens/dashboard.js"),
+  "#/productos": () => import("./screens/productos.js")
   // ... resto de las pantallas
 };
+
+let pantallaActual = null;
 
 async function navegar() {
   const hayUsuario = auth.currentUser !== null;
@@ -22,6 +25,10 @@ async function navegar() {
 
   const cargar = rutas[location.hash] ?? rutas["#/dashboard"];
   const pantalla = await cargar();
+
+  if (pantallaActual && pantallaActual.salir) pantallaActual.salir();
+  pantallaActual = pantalla;
+
   document.getElementById("contenido").replaceChildren(await pantalla.render());
 }
 
