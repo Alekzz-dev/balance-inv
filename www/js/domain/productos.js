@@ -8,5 +8,8 @@ export function validarProducto(datos) {
   if (!Number.isInteger(datos.stock_minimo) || !(datos.stock_minimo > 0)) {
     return "El stock mínimo debe ser un número entero mayor que cero.";
   }
+  if (!["activo", "inactivo"].includes(datos.estado)) {
+    return "Selecciona el estado del producto.";
+  }
   return null;
 }
