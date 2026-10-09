@@ -22,18 +22,18 @@ const iconos = {
   historial: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   alertas: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/>',
   triangulo: '<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/>',
-  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>'
+  mas: '<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>'
 };
 
 const menu = [
   {
     grupo: "Principal",
     items: [
-      { nombre: "Dashboard", ruta: "#/dashboard", icono: "dashboard", listo: true },
-      { nombre: "Productos", ruta: "#/productos", icono: "producto", listo: true },
+      { nombre: "Dashboard", ruta: "#/dashboard", icono: "dashboard", listo: true, pestana: true },
+      { nombre: "Productos", ruta: "#/productos", icono: "producto", listo: true, pestana: true },
       { nombre: "Inventario", ruta: "#/inventario", icono: "inventario", listo: false },
-      { nombre: "Compras", ruta: "#/compras", icono: "compras", listo: true },
-      { nombre: "Ventas", ruta: "#/ventas", icono: "ventas", listo: false }
+      { nombre: "Compras", ruta: "#/compras", icono: "compras", listo: true, pestana: true },
+      { nombre: "Ventas", ruta: "#/ventas", icono: "ventas", listo: false, pestana: true }
     ]
   },
   {
@@ -65,6 +65,18 @@ function htmlMenu(rutaActiva) {
   `).join("");
 }
 
+function htmlPestanas(rutaActiva) {
+  const pestanas = menu.flatMap((grupo) => grupo.items).filter((item) => item.pestana);
+  const html = pestanas.map((item) => item.listo
+    ? `<a class="tab${item.ruta === rutaActiva ? " activo" : ""}" href="${item.ruta}">
+         ${icono(item.icono)}<span>${item.nombre}</span></a>`
+    : `<span class="tab pronto" title="Próximamente">
+         ${icono(item.icono)}<span>${item.nombre}</span></span>`
+  ).join("");
+  return html + `<button class="tab" type="button" id="boton-mas">
+    ${icono("mas")}<span>Más</span></button>`;
+}
+
 export function crearMarco(titulo, rutaActiva, contenido) {
   const marco = document.createElement("div");
   marco.className = "marco";
@@ -83,14 +95,12 @@ export function crearMarco(titulo, rutaActiva, contenido) {
     <div class="velo" id="velo"></div>
     <div class="principal">
       <header class="cabecera">
-        <button class="boton-menu" type="button" id="boton-menu" aria-label="Abrir menú">
-          ${icono("menu")}
-        </button>
         <h1 class="cabecera-titulo"></h1>
         <a class="boton" href="#/productos">+ Nuevo producto</a>
       </header>
       <main class="contenido-principal" id="contenido-principal"></main>
     </div>
+    <nav class="tabbar" aria-label="Navegación principal">${htmlPestanas(rutaActiva)}</nav>
   `;
 
   marco.querySelector(".cabecera-titulo").textContent = titulo;
@@ -102,8 +112,15 @@ export function crearMarco(titulo, rutaActiva, contenido) {
     lateral.classList.toggle("abierto");
     velo.classList.toggle("visible");
   };
-  marco.querySelector("#boton-menu").addEventListener("click", alternarMenu);
-  velo.addEventListener("click", alternarMenu);
+  const cerrarMenu = () => {
+    lateral.classList.remove("abierto");
+    velo.classList.remove("visible");
+  };
+  marco.querySelector("#boton-mas").addEventListener("click", alternarMenu);
+  velo.addEventListener("click", cerrarMenu);
+  for (const enlace of lateral.querySelectorAll("a.menu-item")) {
+    enlace.addEventListener("click", cerrarMenu);
+  }
   marco.querySelector("#boton-salir").addEventListener("click", cerrarSesion);
 
   obtenerUsuarioActual()
