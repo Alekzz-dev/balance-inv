@@ -2,6 +2,7 @@ import { iniciarSesion } from "../services/auth.js";
 
 export function render() {
   const pantalla = document.createElement("section");
+    pantalla.className = "pantalla-login";
   pantalla.innerHTML = `
     <h1>BALANCE-INV</h1>
     <form class="formulario" id="form-login" novalidate>

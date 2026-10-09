@@ -2,50 +2,162 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio);
+  max-width: 40rem;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  color: var(--texto-suave);
+  font-size: 0.875rem;
 }
 
-.campo input {
-  min-height: 3rem;
-  padding: 0 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #c9d1db;
-  border-radius: 0.5rem;
-}
-
-.boton {
-  min-height: 3rem;
-  font-size: 1rem;
-  color: #ffffff;
-  background: var(--color-primario);
-  border: none;
-  border-radius: 0.5rem;
-}
-
-.boton:disabled {
-  opacity: 0.6;
-}
-
-.mensaje-error {
-  color: var(--color-error);
-  min-height: 1.25rem;
-}
+.campo input,
 .campo select {
   min-height: 3rem;
   padding: 0 0.75rem;
   font-size: 1rem;
-  border: 1px solid #c9d1db;
-  border-radius: 0.5rem;
+  color: var(--texto);
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--acento);
+  outline-offset: 1px;
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--acento);
+  border: none;
+  border-radius: var(--radio);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.boton-secundario {
+  color: var(--texto);
+  background: transparent;
+  border: 1px solid var(--borde);
+}
+
+.boton-texto {
+  min-height: 2.5rem;
+  padding: 0 0.5rem;
+  font: inherit;
+  color: var(--texto-suave);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.boton-texto:hover {
+  color: var(--texto);
+}
+
+.mensaje-error {
+  min-height: 1.25rem;
+  margin: 0;
+  color: var(--peligro);
 }
 
 .mensaje-exito {
-  color: #15803d;
   min-height: 1.25rem;
+  margin: 0;
+  color: var(--exito);
+}
+
+.panel {
+  padding: 1.25rem;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.panel-titulo {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.tarjeta {
+  padding: 1.25rem;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.tarjeta-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+}
+
+.tono-acento .tarjeta-icono {
+  color: var(--acento);
+  background: rgba(124, 92, 255, 0.15);
+}
+
+.tono-exito .tarjeta-icono {
+  color: var(--exito);
+  background: rgba(53, 199, 89, 0.15);
+}
+
+.tono-aviso .tarjeta-icono {
+  color: var(--aviso);
+  background: rgba(245, 185, 66, 0.15);
+}
+
+.tono-peligro .tarjeta-icono {
+  color: var(--peligro);
+  background: rgba(255, 77, 79, 0.15);
+}
+
+.tarjeta-titulo {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}
+
+.tarjeta-valor {
+  margin: 0.25rem 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.tarjeta-nota {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
 }
 
 .tabla-contenedor {
@@ -54,22 +166,46 @@
 
 .tabla {
   width: 100%;
+  font-size: 0.875rem;
   border-collapse: collapse;
 }
 
 .tabla th,
 .tabla td {
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem;
   text-align: left;
   white-space: nowrap;
-  border-bottom: 1px solid #c9d1db;
+  border-bottom: 1px solid var(--borde);
 }
-.boton-secundario {
-  color: var(--color-primario);
-  background: #ffffff;
-  border: 1px solid var(--color-primario);
+
+.tabla th {
+  font-weight: 500;
+  color: var(--texto-suave);
 }
 
 .tabla .boton {
-  padding: 0 1rem;
+  min-height: 2.5rem;
+}
+
+.insignia {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.insignia-disponible {
+  color: var(--exito);
+  background: rgba(53, 199, 89, 0.15);
+}
+
+.insignia-bajo {
+  color: var(--aviso);
+  background: rgba(245, 185, 66, 0.15);
+}
+
+.insignia-agotado {
+  color: var(--peligro);
+  background: rgba(255, 77, 79, 0.15);
 }

@@ -1,3 +1,4 @@
+import { crearMarco } from "../marco.js";
 import { validarProducto } from "../domain/productos.js";
 import { actualizarProducto, crearProducto, existeCodigo, escucharProductos }
   from "../services/productos.js";
@@ -7,7 +8,7 @@ let cancelarEscucha = null;
 export function render() {
   const pantalla = document.createElement("section");
   pantalla.innerHTML = `
-    <p><a href="#/dashboard">&larr; Volver al Dashboard</a></p>
+      <p><a href="#/dashboard">&larr; Volver al Dashboard</a></p>
     <h1>Productos</h1>
 
     <h2 id="titulo-formulario">Registrar producto</h2>
@@ -237,7 +238,7 @@ export function render() {
     }
   );
 
-  return pantalla;
+    return crearMarco("Productos", "#/productos", pantalla);
 }
 
 export function salir() {
