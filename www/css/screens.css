@@ -337,3 +337,14 @@
     padding: 1rem;
   }
 }
+.pantalla-compras {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.grupo-campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio);
+}

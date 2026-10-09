@@ -5,7 +5,8 @@ import { onAuthStateChanged }
 const rutas = {
   "#/login": () => import("./screens/login.js"),
   "#/dashboard": () => import("./screens/dashboard.js"),
-  "#/productos": () => import("./screens/productos.js")
+  "#/productos": () => import("./screens/productos.js"),
+  "#/compras": () => import("./screens/compras.js")
   // ... resto de las pantallas
 };
 
