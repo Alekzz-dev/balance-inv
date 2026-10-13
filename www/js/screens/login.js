@@ -2,21 +2,24 @@ import { iniciarSesion } from "../services/auth.js";
 
 export function render() {
   const pantalla = document.createElement("section");
-    pantalla.className = "pantalla-login";
+  pantalla.className = "login";
   pantalla.innerHTML = `
-    <h1>BALANCE-INV</h1>
-    <form class="formulario" id="form-login" novalidate>
-      <label class="campo">
-        Correo
-        <input type="email" id="correo" autocomplete="username" />
-      </label>
-      <label class="campo">
-        Contraseña
-        <input type="password" id="contrasena" autocomplete="current-password" />
-      </label>
-      <p class="mensaje-error" id="mensaje-error"></p>
-      <button class="boton" type="submit">Ingresar</button>
-    </form>
+    <div class="login-tarjeta">
+      <h1>BALANCE-INV</h1>
+      <p class="login-subtitulo">Control de inventario, ventas y documentación</p>
+      <form class="formulario" id="form-login" novalidate>
+        <label class="campo">
+          Correo
+          <input type="email" id="correo" autocomplete="username" />
+        </label>
+        <label class="campo">
+          Contraseña
+          <input type="password" id="contrasena" autocomplete="current-password" />
+        </label>
+        <p class="mensaje-error" id="mensaje-error"></p>
+        <button class="boton" type="submit">Ingresar</button>
+      </form>
+    </div>
   `;
 
   const formulario = pantalla.querySelector("#form-login");

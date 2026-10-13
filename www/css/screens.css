@@ -1,15 +1,31 @@
-.pantalla-login {
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 1rem;
+}
+
+.login-tarjeta {
+  width: 100%;
   max-width: 26rem;
-  margin: 3rem auto;
-  padding: 1.5rem;
+  padding: 2rem;
   background: var(--tarjeta);
   border: 1px solid var(--borde);
   border-radius: var(--radio);
+  box-shadow: var(--sombra);
 }
 
-.pantalla-login h1 {
-  margin-bottom: 1.25rem;
+.login-tarjeta h1 {
+  margin-bottom: 0.25rem;
   font-size: 1.5rem;
+}
+
+.login-subtitulo {
+  margin: 0 0 1.5rem;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
 }
 
 .marco {
@@ -389,8 +405,7 @@
     padding: 1rem;
   }
 
-  .pantalla-login {
-    margin: 1rem auto;
+    .login-tarjeta {
     padding: 1.25rem;
   }
 }
