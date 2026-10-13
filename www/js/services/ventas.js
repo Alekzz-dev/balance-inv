@@ -22,6 +22,15 @@ export function escucharVentasDelDia(alRecibir, alFallar) {
   );
 }
 
+export function escucharVentasDesde(inicio, alRecibir, alFallar) {
+  const consulta = query(collection(db, "ventas"), where("fecha", ">=", inicio));
+  return onSnapshot(
+    consulta,
+    (snap) => alRecibir(snap.docs.map((d) => ({ ...d.data(), fecha: d.data().fecha.toDate() }))),
+    alFallar
+  );
+}
+
 export function escucharVentas(alRecibir, alFallar) {
   const consulta = query(collection(db, "ventas"), orderBy("fecha", "desc"), limit(20));
   return onSnapshot(

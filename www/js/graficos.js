@@ -29,3 +29,82 @@ export function crearDonut(segmentos, total) {
   }
   return svg;
 }
+
+export function crearGraficoLineas(puntos, formatoValor, formatoEtiqueta, alSeleccionar) {
+  const n = puntos.length;
+  const maximo = Math.max(...puntos.map((p) => p.valor), 0);
+  const escala = maximo > 0 ? maximo : 1;
+  const posX = (i) => (n === 1 ? 50 : (i / (n - 1)) * 100);
+  const posY = (valor) => 100 - (valor / escala) * 100;
+
+  const grafico = document.createElement("div");
+  grafico.className = "grafico";
+
+  const ejeY = document.createElement("div");
+  ejeY.className = "grafico-y";
+  for (const fraccion of [1, 2 / 3, 1 / 3, 0]) {
+    const marca = document.createElement("span");
+    marca.textContent = formatoValor(maximo * fraccion);
+    ejeY.append(marca);
+  }
+
+  const area = document.createElement("div");
+  area.className = "grafico-area";
+
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 100 100");
+  svg.setAttribute("preserveAspectRatio", "none");
+  for (const y of [0, 100 / 3, 200 / 3, 100]) {
+    const guia = document.createElementNS(NS, "line");
+    guia.setAttribute("x1", "0");
+    guia.setAttribute("x2", "100");
+    guia.setAttribute("y1", String(y));
+    guia.setAttribute("y2", String(y));
+    guia.setAttribute("class", "grafico-guia");
+    svg.append(guia);
+  }
+  const trazo = puntos.map((p, i) => posX(i) + "," + posY(p.valor)).join(" ");
+  const relleno = document.createElementNS(NS, "polygon");
+  relleno.setAttribute("points", posX(0) + ",100 " + trazo + " " + posX(n - 1) + ",100");
+  relleno.setAttribute("class", "grafico-relleno");
+  const linea = document.createElementNS(NS, "polyline");
+  linea.setAttribute("points", trazo);
+  linea.setAttribute("class", "grafico-trazo");
+  svg.append(relleno, linea);
+
+  const marcador = document.createElement("div");
+  marcador.className = "grafico-marcador";
+  marcador.hidden = true;
+  area.append(svg, marcador);
+
+  const paso = n > 1 ? 100 / (n - 1) : 100;
+  puntos.forEach((punto, i) => {
+    const zona = document.createElement("div");
+    zona.className = "grafico-zona";
+    zona.style.left = posX(i) - paso / 2 + "%";
+    zona.style.width = paso + "%";
+    const seleccionar = () => {
+      marcador.hidden = false;
+      marcador.style.left = posX(i) + "%";
+      marcador.style.top = posY(punto.valor) + "%";
+      alSeleccionar(punto);
+    };
+    zona.addEventListener("pointerenter", seleccionar);
+    zona.addEventListener("click", seleccionar);
+    area.append(zona);
+  });
+
+  const ejeX = document.createElement("div");
+  ejeX.className = "grafico-x";
+  const salto = Math.max(1, Math.ceil(n / 6));
+  puntos.forEach((punto, i) => {
+    if (i % salto !== 0) return;
+    const etiqueta = document.createElement("span");
+    etiqueta.textContent = formatoEtiqueta(punto);
+    etiqueta.style.left = posX(i) + "%";
+    ejeX.append(etiqueta);
+  });
+
+  grafico.append(ejeY, area, ejeX);
+  return grafico;
+}

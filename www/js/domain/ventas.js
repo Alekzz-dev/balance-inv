@@ -20,3 +20,30 @@ export function validarVenta(datos, producto) {
   }
   return null;
 }
+
+export function totalesPorDia(ventas, inicio, dias) {
+  const puntos = [];
+  for (let i = 0; i < dias; i++) {
+    const fecha = new Date(inicio);
+    fecha.setDate(fecha.getDate() + i);
+    puntos.push({ fecha, valor: 0 });
+  }
+  for (const venta of ventas) {
+    const dia = new Date(venta.fecha);
+    dia.setHours(0, 0, 0, 0);
+    const indice = Math.round((dia - inicio) / 86400000);
+    if (indice >= 0 && indice < dias) {
+      puntos[indice].valor += venta.cantidad * venta.precio;
+    }
+  }
+  return puntos;
+}
+
+export function sumar(puntos) {
+  return puntos.reduce((suma, punto) => suma + punto.valor, 0);
+}
+
+export function variacionPorcentual(actual, anterior) {
+  if (anterior === 0) return null;
+  return ((actual - anterior) / anterior) * 100;
+}

@@ -2,9 +2,10 @@ import { estadoDeStock, formatearSoles, resumirInventario, totalVentas }
   from "../domain/inventario.js";
 import { crearDonut } from "../graficos.js";
 import { crearMarco, icono } from "../marco.js";
+import { crearPanelVentas } from "../panelVentas.js";
 import { escucharAlertasPendientes } from "../services/alertas.js";
 import { escucharProductos } from "../services/productos.js";
-import { escucharVentasDelDia } from "../services/ventas.js";
+import { escucharVentas, escucharVentasDelDia } from "../services/ventas.js";
 
 const MAX_FILAS = 8;
 const ETIQUETAS = { disponible: "Disponible", bajo: "Stock bajo", agotado: "Agotado" };
@@ -31,12 +32,38 @@ export function render() {
   contenido.innerHTML = `
     <section class="tarjetas" id="tarjetas"></section>
 
-    <section class="fila-dos">
+    <section class="fila-asimetrica" id="fila-ventas">
       <article class="panel">
         <h2 class="panel-titulo">Estado del inventario</h2>
         <div class="inventario">
           <div class="donut-caja" id="donut-caja"></div>
           <ul class="leyenda" id="leyenda"></ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="fila-asimetrica">
+      <article class="panel">
+        <h2 class="panel-titulo">Ventas recientes</h2>
+        <p id="estado-ventas">Cargando...</p>
+        <div class="tabla-contenedor">
+          <table class="tabla">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Cliente</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Comprobante</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-ventas"></tbody>
+          </table>
+        </div>
+        <div class="pie-tabla">
+          <span></span>
+          <a href="#/ventas">Ver todas las ventas</a>
         </div>
       </article>
 
@@ -95,6 +122,9 @@ export function render() {
     </section>
   `;
 
+  const panelVentas = crearPanelVentas();
+  contenido.querySelector("#fila-ventas").prepend(panelVentas.elemento);
+
   const kProductos = crearTarjeta("Productos registrados", "producto", "acento", "Total en el catálogo");
   const kImportados = crearTarjeta("Productos importados", "compras", "acento", "Categoría Importado");
   const kNacionales = crearTarjeta("Productos nacionales", "inventario", "acento", "Categoría Nacional");
@@ -107,6 +137,8 @@ export function render() {
 
   const donutCaja = contenido.querySelector("#donut-caja");
   const leyenda = contenido.querySelector("#leyenda");
+  const estadoVentas = contenido.querySelector("#estado-ventas");
+  const cuerpoVentas = contenido.querySelector("#cuerpo-ventas");
   const estadoAlertas = contenido.querySelector("#estado-alertas");
   const listaAlertas = contenido.querySelector("#lista-alertas");
   const campoBuscar = contenido.querySelector("#buscar");
@@ -117,6 +149,7 @@ export function render() {
   const resumenTabla = contenido.querySelector("#resumen-tabla");
 
   let productos = [];
+  let ventasRecientes = [];
 
   function dibujarInventario(resumen) {
     const segmentos = [
@@ -147,6 +180,36 @@ export function render() {
       cantidad.textContent = segmento.valor;
       fila.append(punto, nombre, cantidad);
       leyenda.append(fila);
+    }
+  }
+
+  function dibujarVentasRecientes() {
+    const porProducto = new Map(productos.map((p) => [p.id_producto, p]));
+
+    cuerpoVentas.replaceChildren();
+    estadoVentas.textContent = ventasRecientes.length === 0
+      ? "Aún no hay ventas registradas."
+      : "";
+
+    for (const venta of ventasRecientes.slice(0, 5)) {
+      const producto = porProducto.get(venta.id_producto);
+      const valores = [
+        venta.fecha ? venta.fecha.toDate().toLocaleDateString("es-PE") : "",
+        producto ? producto.nombre : "—",
+        venta.cliente || "—",
+        venta.cantidad,
+        formatearSoles(venta.cantidad * venta.precio),
+        venta.tipo_comprobante
+          ? venta.tipo_comprobante + " " + venta.numero_comprobante
+          : "Sin comprobante"
+      ];
+      const fila = document.createElement("tr");
+      for (const valor of valores) {
+        const celda = document.createElement("td");
+        celda.textContent = valor;
+        fila.append(celda);
+      }
+      cuerpoVentas.append(fila);
     }
   }
 
@@ -246,6 +309,7 @@ export function render() {
         kBajo.valor.textContent = resumen.stockBajo;
         dibujarInventario(resumen);
         dibujarTabla();
+        dibujarVentasRecientes();
       },
       () => {
         estadoLista.textContent = "No se pudo cargar la lista de productos.";
@@ -259,6 +323,15 @@ export function render() {
         kVentas.valor.textContent = "—";
       }
     ),
+    escucharVentas(
+      (lista) => {
+        ventasRecientes = lista;
+        dibujarVentasRecientes();
+      },
+      () => {
+        estadoVentas.textContent = "No se pudieron cargar las ventas.";
+      }
+    ),
     escucharAlertasPendientes(
       (lista) => {
         kAlertas.valor.textContent = lista.length;
@@ -268,7 +341,8 @@ export function render() {
         kAlertas.valor.textContent = "—";
         estadoAlertas.textContent = "No se pudieron cargar las alertas.";
       }
-    )
+    ),
+    panelVentas.cancelar
   ];
 
   return crearMarco("Dashboard", "#/dashboard", contenido);
