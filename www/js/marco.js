@@ -33,7 +33,7 @@ const menu = [
       { nombre: "Productos", ruta: "#/productos", icono: "producto", listo: true, pestana: true },
       { nombre: "Inventario", ruta: "#/inventario", icono: "inventario", listo: false },
       { nombre: "Compras", ruta: "#/compras", icono: "compras", listo: true, pestana: true },
-      { nombre: "Ventas", ruta: "#/ventas", icono: "ventas", listo: false, pestana: true }
+      { nombre: "Ventas", ruta: "#/ventas", icono: "ventas", listo: true, pestana: true }
     ]
   },
   {

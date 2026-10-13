@@ -394,3 +394,14 @@
     padding: 1.25rem;
   }
 }
+.pantalla-ventas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ayuda {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
