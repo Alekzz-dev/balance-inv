@@ -996,3 +996,52 @@
     border-radius: 0;
   }
 }
+.pantalla-historial {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.herramientas .boton {
+  align-self: flex-end;
+}
+
+.cantidad-positiva {
+  font-weight: 600;
+  color: var(--exito);
+}
+
+.cantidad-negativa {
+  font-weight: 600;
+  color: var(--peligro);
+}
+
+.insignia-compra {
+  color: var(--acento);
+  background: rgba(var(--acento-rgb), 0.15);
+}
+
+.insignia-venta {
+  color: var(--aviso);
+  background: rgba(245, 185, 66, 0.15);
+}
+
+.insignia-otro {
+  color: var(--texto-suave);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.detalle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+}
+
+.detalle dt {
+  color: var(--texto-suave);
+}
+
+.detalle dd {
+  margin: 0;
+}

@@ -7,7 +7,8 @@ const rutas = {
   "#/dashboard": () => import("./screens/dashboard.js"),
   "#/productos": () => import("./screens/productos.js"),
   "#/compras": () => import("./screens/compras.js"),
-  "#/ventas": () => import("./screens/ventas.js")
+  "#/ventas": () => import("./screens/ventas.js"),
+  "#/historial": () => import("./screens/historial.js")
   // ... resto de las pantallas
 };
 
@@ -32,7 +33,7 @@ async function navegar() {
   pantallaActual = pantalla;
 
   document.getElementById("contenido").replaceChildren(await pantalla.render());
-    if (window.ocultarSplash) window.ocultarSplash();
+  if (window.ocultarSplash) window.ocultarSplash();
 }
 
 window.addEventListener("hashchange", navegar);

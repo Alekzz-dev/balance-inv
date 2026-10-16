@@ -1,4 +1,4 @@
-import { doc, getDoc }
+import { collection, doc, getDoc, onSnapshot }
   from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 import { auth, db } from "../firebase-config.js";
 
@@ -9,4 +9,12 @@ export async function obtenerUsuarioActual() {
     throw new Error("Usuario no registrado en la colección usuarios");
   }
   return instantanea.data();
+}
+
+export function escucharUsuarios(alRecibir, alFallar) {
+  return onSnapshot(
+    collection(db, "usuarios"),
+    (snap) => alRecibir(snap.docs.map((d) => d.data())),
+    alFallar
+  );
 }
