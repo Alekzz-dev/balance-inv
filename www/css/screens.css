@@ -90,7 +90,7 @@
 
 .menu-item.activo {
   color: var(--texto);
-  background: rgba(124, 92, 255, 0.18);
+  background: rgba(var(--acento-rgb), 0.18);
 }
 
 .menu-item.pronto {
@@ -455,7 +455,7 @@
 
 .segmento.activo {
   color: var(--texto);
-  background: rgba(124, 92, 255, 0.25);
+  background: rgba(var(--acento-rgb), 0.25);
 }
 
 .ventas-total {
@@ -516,7 +516,7 @@
 }
 
 .grafico-relleno {
-  fill: rgba(124, 92, 255, 0.15);
+  fill: rgba(var(--acento-rgb), 0.15);
   stroke: none;
 }
 
@@ -555,5 +555,444 @@
 @media (max-width: 900px) {
   .fila-asimetrica {
     grid-template-columns: 1fr;
+  }
+}
+.acceso {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.acceso-marca {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem;
+  background:
+    radial-gradient(40rem 24rem at 20% 0%, rgba(var(--acento-rgb), 0.22), transparent 60%),
+    var(--fondo-lateral);
+  border-right: 1px solid var(--borde);
+}
+
+.acceso-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  color: var(--acento-texto);
+  background: var(--acento);
+  border-radius: 14px;
+}
+
+.acceso-logo .icono {
+  width: 2rem;
+  height: 2rem;
+}
+
+.acceso-marca h1 {
+  font-size: 2.25rem;
+}
+
+.acceso-lema {
+  max-width: 24rem;
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--texto-suave);
+}
+
+.acceso-puntos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 1rem 0 0;
+  color: var(--texto-suave);
+  list-style: none;
+}
+
+.acceso-puntos li::before {
+  margin-right: 0.6rem;
+  font-weight: 700;
+  color: var(--acento);
+  content: "✓";
+}
+
+.acceso-formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 26rem;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.acceso-formulario h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.marca-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--acento-texto);
+  background: var(--acento);
+  border-radius: 10px;
+}
+
+.marca .marca-logo .icono {
+  color: inherit;
+}
+
+.marca-nombre {
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.02em;
+}
+
+.tarjeta-valor,
+.ventas-total,
+.donut-centro strong {
+  font-family: var(--fuente-titulo);
+}
+
+.tarjeta {
+  border-top: 2px solid var(--borde);
+}
+
+.tono-acento {
+  border-top-color: var(--acento);
+}
+
+.tono-exito {
+  border-top-color: var(--exito);
+}
+
+.tono-aviso {
+  border-top-color: var(--aviso);
+}
+
+.tono-peligro {
+  border-top-color: var(--peligro);
+}
+
+.bienvenida {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(var(--acento-rgb), 0.18), rgba(var(--acento-rgb), 0.04)),
+    var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.bienvenida-fecha {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.contenido-principal .bienvenida-titulo {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+
+.bienvenida-resumen {
+  margin: 0.5rem 0 0;
+  color: var(--texto-suave);
+}
+
+.bienvenida-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .acceso {
+    grid-template-columns: 1fr;
+    align-content: start;
+  }
+
+  .acceso-marca {
+    padding: 2rem 1.5rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .acceso-puntos {
+    display: none;
+  }
+
+  .acceso-formulario {
+    justify-content: flex-start;
+    padding: 1.5rem;
+  }
+}
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  background:
+    radial-gradient(36rem 24rem at 50% 38%, rgba(var(--acento-rgb), 0.25), transparent 65%),
+    var(--fondo-lateral);
+  transition: opacity 0.5s ease;
+}
+
+.splash.saliendo {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.splash-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  margin-bottom: 0.75rem;
+  color: var(--acento-texto);
+  background: var(--acento);
+  border-radius: 1.75rem;
+  box-shadow: 0 0 3rem rgba(var(--acento-rgb), 0.45);
+  animation: splash-entrar 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.splash-icono {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.splash-brazos {
+  transform-origin: 12px 7px;
+  animation: splash-balancear 1.5s ease-in-out 0.7s both;
+}
+
+.splash-nombre {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  animation: splash-subir 0.5s ease 0.6s both;
+}
+
+.splash-lema {
+  max-width: 20rem;
+  margin: 0;
+  color: var(--texto-suave);
+  animation: splash-subir 0.5s ease 0.8s both;
+}
+
+@keyframes splash-entrar {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes splash-subir {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-balancear {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(-12deg);
+  }
+
+  45% {
+    transform: rotate(9deg);
+  }
+
+  65% {
+    transform: rotate(-5deg);
+  }
+
+  82% {
+    transform: rotate(2deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.entrada {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 1rem;
+}
+
+.entrada-tarjeta {
+  width: 100%;
+  max-width: 26rem;
+  overflow: hidden;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 1.5rem;
+  box-shadow: var(--sombra);
+  animation: splash-subir 0.5s ease both;
+}
+
+.entrada-cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  background:
+    linear-gradient(160deg, rgba(var(--acento-rgb), 0.38), rgba(var(--acento-rgb), 0.06)),
+    var(--fondo-lateral);
+  border-radius: 0 0 2rem 2rem;
+}
+
+.entrada-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 0.25rem;
+  color: var(--acento-texto);
+  background: var(--acento);
+  border-radius: 1.25rem;
+}
+
+.entrada-logo .icono {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.entrada-cabecera h1 {
+  font-size: 1.75rem;
+}
+
+.entrada-lema {
+  max-width: 18rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.entrada-formulario {
+  padding: 1.75rem 1.5rem 2rem;
+}
+
+.entrada-formulario h2 {
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+}
+
+.campo-icono {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 0.9rem;
+  color: var(--texto-suave);
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+}
+
+.campo-icono:focus-within {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px rgba(var(--acento-rgb), 0.2);
+}
+
+.campo-icono input {
+  flex: 1;
+  min-width: 0;
+  min-height: 3.25rem;
+  padding: 0;
+  font: inherit;
+  color: var(--texto);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.campo-icono input::placeholder {
+  color: var(--texto-suave);
+}
+
+.ojo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-right: -0.6rem;
+  color: var(--texto-suave);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.entrada-formulario .boton {
+  min-height: 3.25rem;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-logo,
+  .splash-brazos,
+  .splash-nombre,
+  .splash-lema,
+  .entrada-tarjeta {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .entrada {
+    padding: 0;
+  }
+
+  .entrada-tarjeta {
+    max-width: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    border: none;
+    border-radius: 0;
   }
 }

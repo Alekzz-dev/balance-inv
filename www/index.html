@@ -2,18 +2,56 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>BALANCE-INV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/screens.css" />
 </head>
 <body>
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-logo">
+      <svg class="splash-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v18" />
+        <path d="M5 21h14" />
+        <g class="splash-brazos">
+          <path d="M5 7h14" />
+          <path d="M5 7l-3 7a3 3 0 0 0 6 0z" />
+          <path d="M19 7l-3 7a3 3 0 0 0 6 0z" />
+        </g>
+      </svg>
+    </div>
+    <p class="splash-nombre">BALANCE-INV</p>
+    <p class="splash-lema">Control de inventario, ventas y documentación</p>
+  </div>
+
   <div id="contenido"></div>
+
+  <script>
+    (function () {
+      var inicio = Date.now();
+      var DURACION = 2200;
+
+      function quitar() {
+        var splash = document.getElementById("splash");
+        if (!splash) return;
+        splash.classList.add("saliendo");
+        setTimeout(function () { splash.remove(); }, 500);
+      }
+
+      window.ocultarSplash = function () {
+        var restante = Math.max(0, DURACION - (Date.now() - inicio));
+        setTimeout(quitar, restante);
+      };
+
+      setTimeout(window.ocultarSplash, 6000);
+    })();
+  </script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

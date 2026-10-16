@@ -6,13 +6,16 @@
   --borde: rgba(255, 255, 255, 0.08);
   --texto: #ffffff;
   --texto-suave: #a1a1aa;
-  --acento: #7c5cff;
+  --acento: #22b8cf;
+  --acento-rgb: 34, 184, 207;
+  --acento-texto: #04252b;
   --exito: #35c759;
   --aviso: #f5b942;
   --peligro: #ff4d4f;
   --radio: 10px;
   --sombra: 0 1px 3px rgba(0, 0, 0, 0.35);
   --espacio: 1rem;
+  --fuente-titulo: Sora, Inter, system-ui, sans-serif;
 }
 
 * {
@@ -27,7 +30,9 @@ body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
   color: var(--texto);
-  background: var(--fondo);
+  background:
+    radial-gradient(48rem 24rem at 90% -8%, rgba(var(--acento-rgb), 0.12), transparent 60%),
+    var(--fondo);
 }
 
 a {
@@ -37,4 +42,5 @@ a {
 h1,
 h2 {
   margin: 0;
+  font-family: var(--fuente-titulo);
 }

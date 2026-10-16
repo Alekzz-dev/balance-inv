@@ -1,5 +1,6 @@
 import { estadoDeStock, formatearSoles, resumirInventario, totalVentas }
   from "../domain/inventario.js";
+import { crearBienvenida } from "../bienvenida.js";
 import { crearDonut } from "../graficos.js";
 import { crearMarco, icono } from "../marco.js";
 import { crearPanelVentas } from "../panelVentas.js";
@@ -124,6 +125,9 @@ export function render() {
 
   const panelVentas = crearPanelVentas();
   contenido.querySelector("#fila-ventas").prepend(panelVentas.elemento);
+
+  const bienvenida = crearBienvenida();
+  contenido.prepend(bienvenida.elemento);
 
   const kProductos = crearTarjeta("Productos registrados", "producto", "acento", "Total en el catálogo");
   const kImportados = crearTarjeta("Productos importados", "compras", "acento", "Categoría Importado");
@@ -307,6 +311,7 @@ export function render() {
         kImportados.valor.textContent = resumen.importados;
         kNacionales.valor.textContent = resumen.nacionales;
         kBajo.valor.textContent = resumen.stockBajo;
+        bienvenida.actualizarInventario(resumen);
         dibujarInventario(resumen);
         dibujarTabla();
         dibujarVentasRecientes();
@@ -335,6 +340,7 @@ export function render() {
     escucharAlertasPendientes(
       (lista) => {
         kAlertas.valor.textContent = lista.length;
+        bienvenida.actualizarAlertas(lista.length);
         dibujarAlertas(lista);
       },
       () => {

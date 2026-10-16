@@ -38,7 +38,7 @@
   padding: 0 1.25rem;
   font: inherit;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--acento-texto);
   background: var(--acento);
   border: none;
   border-radius: var(--radio);
@@ -124,7 +124,7 @@
 
 .tono-acento .tarjeta-icono {
   color: var(--acento);
-  background: rgba(124, 92, 255, 0.15);
+  background: rgba(var(--acento-rgb), 0.15);
 }
 
 .tono-exito .tarjeta-icono {

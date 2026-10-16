@@ -2,7 +2,13 @@ import { cerrarSesion } from "./services/auth.js";
 import { obtenerUsuarioActual } from "./services/usuarios.js";
 
 const iconos = {
-  dashboard:
+  marca:
+    '<path d="M12 3v18"/><path d="M5 21h14"/><path d="M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/>',
+    correo: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+  candado: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  ojo: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  ojoTachado: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/>',
+    dashboard:
     '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>' +
     '<rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
   producto:
@@ -82,7 +88,10 @@ export function crearMarco(titulo, rutaActiva, contenido) {
   marco.className = "marco";
   marco.innerHTML = `
     <aside class="lateral" id="lateral">
-      <div class="marca">${icono("producto")}<span>BALANCE-INV</span></div>
+            <div class="marca">
+        <span class="marca-logo">${icono("marca")}</span>
+        <span class="marca-nombre">BALANCE-INV</span>
+      </div>
       <nav class="menu">${htmlMenu(rutaActiva)}</nav>
       <div class="perfil">
         <div class="perfil-datos">

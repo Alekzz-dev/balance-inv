@@ -32,6 +32,7 @@ async function navegar() {
   pantallaActual = pantalla;
 
   document.getElementById("contenido").replaceChildren(await pantalla.render());
+    if (window.ocultarSplash) window.ocultarSplash();
 }
 
 window.addEventListener("hashchange", navegar);
