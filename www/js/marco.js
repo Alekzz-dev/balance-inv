@@ -48,7 +48,7 @@ const menu = [
       { nombre: "Documentación", ruta: "#/documentacion", icono: "documentos", listo: false },
       { nombre: "Balance", ruta: "#/balance", icono: "balance", listo: false },
       { nombre: "Historial", ruta: "#/historial", icono: "historial", listo: true },
-      { nombre: "Alertas", ruta: "#/alertas", icono: "alertas", listo: false }
+      { nombre: "Alertas", ruta: "#/alertas", icono: "alertas", listo: true }
     ]
   }
 ];

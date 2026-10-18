@@ -1045,3 +1045,32 @@
 .detalle dd {
   margin: 0;
 }
+.alerta-atendida {
+  background: rgba(255, 255, 255, 0.04);
+  border-left-color: var(--texto-suave);
+}
+
+.alerta-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.alerta .insignia {
+  font-size: 0.75rem;
+}
+
+.alerta .insignia-bajo {
+  color: var(--aviso);
+}
+
+.alerta .insignia-disponible {
+  color: var(--exito);
+}
+
+.alerta .nota-exito {
+  color: var(--exito);
+}

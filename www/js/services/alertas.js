@@ -1,4 +1,4 @@
-import { collection, onSnapshot, query, where }
+import { collection, doc, limit, onSnapshot, orderBy, query, updateDoc, where }
   from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 import { db } from "../firebase-config.js";
 
@@ -13,4 +13,20 @@ export function escucharAlertasPendientes(alRecibir, alFallar) {
     },
     alFallar
   );
+}
+
+export function escucharAlertas(alRecibir, alFallar) {
+  const consulta = query(collection(db, "alertas"), orderBy("fecha", "desc"), limit(200));
+  return onSnapshot(
+    consulta,
+    (snap) => alRecibir(snap.docs.map((d) => {
+      const datos = d.data();
+      return { ...datos, fecha: datos.fecha ? datos.fecha.toDate() : null };
+    })),
+    alFallar
+  );
+}
+
+export async function marcarAtendida(idAlerta) {
+  await updateDoc(doc(db, "alertas", idAlerta), { estado: "atendida" });
 }

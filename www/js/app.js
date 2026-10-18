@@ -8,7 +8,8 @@ const rutas = {
   "#/productos": () => import("./screens/productos.js"),
   "#/compras": () => import("./screens/compras.js"),
   "#/ventas": () => import("./screens/ventas.js"),
-  "#/historial": () => import("./screens/historial.js")
+  "#/historial": () => import("./screens/historial.js"),
+  "#/alertas": () => import("./screens/alertas.js")
   // ... resto de las pantallas
 };
 

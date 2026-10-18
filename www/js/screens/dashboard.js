@@ -72,6 +72,10 @@ export function render() {
         <h2 class="panel-titulo">Alertas de inventario</h2>
         <p id="estado-alertas">Cargando...</p>
         <ul class="lista-alertas" id="lista-alertas"></ul>
+                <div class="pie-tabla">
+          <span></span>
+          <a href="#/alertas">Ver todas las alertas</a>
+        </div>
       </article>
     </section>
 
