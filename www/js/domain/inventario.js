@@ -34,3 +34,26 @@ export function formatearSoles(monto) {
     maximumFractionDigits: 2
   });
 }
+
+export function unidadesEnStock(productos) {
+  return productos.reduce((suma, producto) => suma + (producto.stock ?? 0), 0);
+}
+
+export function valorDelInventario(productos) {
+  return productos.reduce(
+    (suma, producto) => suma + (producto.stock ?? 0) * (producto.precio_compra ?? 0),
+    0
+  );
+}
+
+export function ordenarProductos(productos, criterio) {
+  const copia = [...productos];
+  if (criterio === "stock-asc") {
+    copia.sort((a, b) => a.stock - b.stock);
+  } else if (criterio === "stock-desc") {
+    copia.sort((a, b) => b.stock - a.stock);
+  } else {
+    copia.sort((a, b) => (a.nombre ?? "").localeCompare(b.nombre ?? "", "es"));
+  }
+  return copia;
+}

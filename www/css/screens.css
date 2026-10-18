@@ -1074,3 +1074,8 @@
 .alerta .nota-exito {
   color: var(--exito);
 }
+.pantalla-inventario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

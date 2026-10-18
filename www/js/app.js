@@ -6,6 +6,7 @@ const rutas = {
   "#/login": () => import("./screens/login.js"),
   "#/dashboard": () => import("./screens/dashboard.js"),
   "#/productos": () => import("./screens/productos.js"),
+  "#/inventario": () => import("./screens/inventario.js"),
   "#/compras": () => import("./screens/compras.js"),
   "#/ventas": () => import("./screens/ventas.js"),
   "#/historial": () => import("./screens/historial.js"),

@@ -37,14 +37,14 @@ const menu = [
     items: [
       { nombre: "Dashboard", ruta: "#/dashboard", icono: "dashboard", listo: true, pestana: true },
       { nombre: "Productos", ruta: "#/productos", icono: "producto", listo: true, pestana: true },
-      { nombre: "Inventario", ruta: "#/inventario", icono: "inventario", listo: false },
+      { nombre: "Inventario", ruta: "#/inventario", icono: "inventario", listo: true, pestana: true },
       { nombre: "Compras", ruta: "#/compras", icono: "compras", listo: true, pestana: true },
       { nombre: "Ventas", ruta: "#/ventas", icono: "ventas", listo: true, pestana: true }
     ]
   },
   {
     grupo: "Gestión",
-    items: [
+    items: [  
       { nombre: "Documentación", ruta: "#/documentacion", icono: "documentos", listo: false },
       { nombre: "Balance", ruta: "#/balance", icono: "balance", listo: false },
       { nombre: "Historial", ruta: "#/historial", icono: "historial", listo: true },
