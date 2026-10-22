@@ -1089,3 +1089,12 @@
   color: var(--peligro);
   background: rgba(255, 77, 79, 0.15);
 }
+.pantalla-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fila-alerta td {
+  background: rgba(255, 77, 79, 0.08);
+}

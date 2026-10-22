@@ -10,9 +10,9 @@ const rutas = {
   "#/compras": () => import("./screens/compras.js"),
   "#/ventas": () => import("./screens/ventas.js"),
   "#/documentacion": () => import("./screens/documentacion.js"),
+  "#/balance": () => import("./screens/balance.js"),
   "#/historial": () => import("./screens/historial.js"),
   "#/alertas": () => import("./screens/alertas.js")
-  // ... resto de las pantallas
 };
 
 let pantallaActual = null;

@@ -2,11 +2,11 @@ import { collection, doc, getDoc, limit, onSnapshot, orderBy, query }
   from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 import { db } from "../firebase-config.js";
 
-export function escucharMovimientos(alRecibir, alFallar) {
+export function escucharMovimientos(alRecibir, alFallar, maximo = 200) {
   const consulta = query(
     collection(db, "movimientos"),
     orderBy("fecha_hora", "desc"),
-    limit(200)
+    limit(maximo)
   );
   return onSnapshot(
     consulta,
