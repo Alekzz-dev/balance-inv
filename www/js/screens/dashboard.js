@@ -7,6 +7,7 @@ import { crearPanelVentas } from "../panelVentas.js";
 import { escucharAlertasPendientes } from "../services/alertas.js";
 import { escucharProductos } from "../services/productos.js";
 import { escucharVentas, escucharVentasDelDia } from "../services/ventas.js";
+import { etiquetaDeAlerta } from "../domain/alertas.js";
 
 const MAX_FILAS = 8;
 const ETIQUETAS = { disponible: "Disponible", bajo: "Stock bajo", agotado: "Agotado" };
@@ -228,7 +229,7 @@ export function render() {
       const item = document.createElement("li");
       item.className = "alerta";
       const titulo = document.createElement("strong");
-      titulo.textContent = String(alerta.tipo_alerta ?? "Alerta").replaceAll("_", " ");
+            titulo.textContent = etiquetaDeAlerta(alerta.tipo_alerta);
       const mensaje = document.createElement("span");
       mensaje.textContent = alerta.mensaje;
       item.append(titulo, mensaje);

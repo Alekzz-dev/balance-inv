@@ -45,7 +45,7 @@ const menu = [
   {
     grupo: "Gestión",
     items: [  
-      { nombre: "Documentación", ruta: "#/documentacion", icono: "documentos", listo: false },
+      { nombre: "Documentación", ruta: "#/documentacion", icono: "documentos", listo: true },
       { nombre: "Balance", ruta: "#/balance", icono: "balance", listo: false },
       { nombre: "Historial", ruta: "#/historial", icono: "historial", listo: true },
       { nombre: "Alertas", ruta: "#/alertas", icono: "alertas", listo: true }

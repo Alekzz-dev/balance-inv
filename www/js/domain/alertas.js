@@ -1,5 +1,10 @@
+const ETIQUETAS = {
+  stock_bajo: "Stock bajo",
+  saldo_proximo: "Saldo próximo a agotarse"
+};
+
 export function etiquetaDeAlerta(tipo) {
-  if (tipo === "stock_bajo") return "Stock bajo";
+  if (ETIQUETAS[tipo]) return ETIQUETAS[tipo];
   const texto = String(tipo ?? "Alerta").replaceAll("_", " ");
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }

@@ -1,9 +1,12 @@
-import { collection, doc, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp }
-  from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import {
+  collection, doc, limit, onSnapshot, orderBy, query, runTransaction, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { calcularSaldoDocumentado } from "../domain/compras.js";
+import { requiereAlertaDeSaldo } from "../domain/documentacion.js";
 import { auth, db } from "../firebase-config.js";
 
-export function escucharCompras(alRecibir, alFallar) {
-  const consulta = query(collection(db, "compras"), orderBy("fecha", "desc"), limit(20));
+export function escucharCompras(alRecibir, alFallar, maximo = 20) {
+  const consulta = query(collection(db, "compras"), orderBy("fecha", "desc"), limit(maximo));
   return onSnapshot(
     consulta,
     (snap) => alRecibir(snap.docs.map((d) => d.data())),
@@ -51,5 +54,41 @@ export async function registrarCompra({ compra, proveedorNuevo, documento }) {
       id_producto: compra.id_producto,
       id_usuario: auth.currentUser.uid
     });
+  });
+}
+
+export async function registrarUsoDocumentacion(idCompra, cantidad) {
+  const refCompra = doc(db, "compras", idCompra);
+  const refAlerta = doc(db, "alertas", "saldo_proximo_" + idCompra);
+
+  await runTransaction(db, async (tx) => {
+    // 1) Lecturas
+    const snapCompra = await tx.get(refCompra);
+    if (!snapCompra.exists()) throw new Error("Compra no encontrada");
+    const compra = snapCompra.data();
+    const snapAlerta = await tx.get(refAlerta);
+    const snapProducto = await tx.get(doc(db, "productos", compra.id_producto));
+
+    const documentada = compra.cantidad_documentada ?? 0;
+    const utilizada = (compra.cantidad_utilizada ?? 0) + cantidad;
+    if (utilizada > documentada) throw new Error("Saldo insuficiente");
+    const saldo = calcularSaldoDocumentado(documentada, utilizada);
+
+    // 2) Escrituras
+    tx.update(refCompra, { cantidad_utilizada: utilizada, saldo_documentado: saldo });
+
+    const hayAlertaPendiente = snapAlerta.exists() && snapAlerta.data().estado === "pendiente";
+    if (requiereAlertaDeSaldo(saldo, documentada) && !hayAlertaPendiente) {
+      const nombre = snapProducto.exists() ? snapProducto.data().nombre : "el producto";
+      tx.set(refAlerta, {
+        id_alerta: refAlerta.id,
+        tipo_alerta: "saldo_proximo",
+        mensaje: "Saldo próximo a agotarse: " + nombre + " tiene " + saldo +
+          " unidades documentadas disponibles.",
+        fecha: serverTimestamp(),
+        estado: "pendiente",
+        id_producto: compra.id_producto
+      });
+    }
   });
 }

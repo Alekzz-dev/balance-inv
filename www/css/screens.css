@@ -1079,3 +1079,13 @@
   flex-direction: column;
   gap: 1.5rem;
 }
+.pantalla-documentacion {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.insignia-agotado {
+  color: var(--peligro);
+  background: rgba(255, 77, 79, 0.15);
+}
